@@ -4,7 +4,7 @@ import com.example.e_commerce.models.payment.Payment;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-interface PaymentRepository extends JpaRepository<Payment, Long> {
+interface PaymentRepository extends JpaRepository<Payment, String> {
     // PaymentRepository
     @Query(value = "SELECT * FROM payments WHERE id = ?1", nativeQuery = true)
     Payment findByIdNative(String id);

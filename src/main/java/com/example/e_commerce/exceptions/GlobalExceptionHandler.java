@@ -3,6 +3,8 @@ package com.example.e_commerce.exceptions;
 import com.example.e_commerce.dto.auth.Role;
 import com.example.e_commerce.dto.exceptions.ApiErrorResponse;
 import jakarta.servlet.http.HttpServletRequest;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
@@ -21,6 +23,8 @@ import java.util.*;
 
 @RestControllerAdvice
 public class GlobalExceptionHandler {
+
+    private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionHandler.class);
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity<ApiErrorResponse> handleValidationErrors(MethodArgumentNotValidException ex) {
@@ -117,6 +121,18 @@ public class GlobalExceptionHandler {
         apiError.setMessage("Invalid credentials ");
         apiError.setErrors(List.of("Invalid username/email or password error: " + ex.getMessage()));
         return new ResponseEntity<>(apiError, HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(ResourceNotFoundException.class)
+    public ResponseEntity<String> handleNotFound(ResourceNotFoundException ex) {
+        logger.error("Resource not found: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
+    }
+
+    @ExceptionHandler(InvalidOperationException.class)
+    public ResponseEntity<String> handleInvalid(InvalidOperationException ex) {
+        logger.error("Invalid operation: {}", ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(ex.getMessage());
     }
 
 }
