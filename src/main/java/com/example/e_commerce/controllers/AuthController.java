@@ -1,6 +1,8 @@
 package com.example.e_commerce.controllers;
 
+import com.example.e_commerce.dto.auth.JwtResponse;
 import com.example.e_commerce.security.JWTUtil;
+import com.example.e_commerce.services.AuthService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
