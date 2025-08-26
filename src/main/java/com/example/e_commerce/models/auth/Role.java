@@ -1,4 +1,4 @@
-package com.example.e_commerce.models;
+package com.example.e_commerce.models.auth;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;

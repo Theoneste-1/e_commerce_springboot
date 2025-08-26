@@ -1,8 +1,8 @@
 package com.example.e_commerce.security;
 
 
-import com.example.e_commerce.models.User;
-import com.example.e_commerce.repositories.UserRepository;
+import com.example.e_commerce.models.auth.User;
+import com.example.e_commerce.repositories.auth.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetailsService;

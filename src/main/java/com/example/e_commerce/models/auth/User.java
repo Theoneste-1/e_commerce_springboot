@@ -1,6 +1,11 @@
-package com.example.e_commerce.models;
+package com.example.e_commerce.models.auth;
 
 
+import com.example.e_commerce.models.address.Address;
+import com.example.e_commerce.models.cart.Cart;
+import com.example.e_commerce.models.order.Order;
+import com.example.e_commerce.models.reviews.Review;
+import com.example.e_commerce.models.wishlist.Wishlist;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -55,6 +60,22 @@ public class User {
                     )
     )
     private Set<Role> roles = new HashSet();
+
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Order> orders = new HashSet<>();
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Cart cart;
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Address> addresses = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.REMOVE, fetch = FetchType.LAZY)
+    private Set<Review> reviews = new HashSet<>();
+
+    @OneToOne(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Wishlist wishlist;
 
     public void addRole(Role role) {
         this.roles.add(role);

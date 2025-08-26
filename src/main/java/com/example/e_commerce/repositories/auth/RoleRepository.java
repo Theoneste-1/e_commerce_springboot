@@ -1,6 +1,6 @@
-package com.example.e_commerce.repositories;
+package com.example.e_commerce.repositories.auth;
 
-import com.example.e_commerce.models.Role;
+import com.example.e_commerce.models.auth.Role;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import java.util.Optional;

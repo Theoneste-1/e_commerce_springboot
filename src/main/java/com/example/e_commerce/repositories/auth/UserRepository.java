@@ -1,7 +1,7 @@
-package com.example.e_commerce.repositories;
+package com.example.e_commerce.repositories.auth;
 
 
-import com.example.e_commerce.models.User;
+import com.example.e_commerce.models.auth.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

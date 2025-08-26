@@ -2,13 +2,12 @@ package com.example.e_commerce.services;
 
 
 import com.example.e_commerce.config.PasswordEncoder;
-import com.example.e_commerce.models.Role;
-import com.example.e_commerce.models.User;
-import com.example.e_commerce.repositories.RoleRepository;
-import com.example.e_commerce.repositories.UserRepository;
+import com.example.e_commerce.models.auth.Role;
+import com.example.e_commerce.models.auth.User;
+import com.example.e_commerce.repositories.auth.RoleRepository;
+import com.example.e_commerce.repositories.auth.UserRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authorization.method.AuthorizeReturnObject;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

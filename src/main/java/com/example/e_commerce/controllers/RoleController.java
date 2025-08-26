@@ -3,7 +3,7 @@ package com.example.e_commerce.controllers;
 
 
 import com.example.e_commerce.dto.auth.RoleRequest;
-import com.example.e_commerce.models.Role;
+import com.example.e_commerce.models.auth.Role;
 import com.example.e_commerce.services.RoleService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;

@@ -1,8 +1,8 @@
 package com.example.e_commerce.services;
 
 import com.example.e_commerce.dto.auth.RoleRequest;
-import com.example.e_commerce.models.Role;
-import com.example.e_commerce.repositories.RoleRepository;
+import com.example.e_commerce.models.auth.Role;
+import com.example.e_commerce.repositories.auth.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
