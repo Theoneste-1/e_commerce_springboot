@@ -253,4 +253,4 @@ Ensure database migrations have run successfully
 ## Support
 For support, please email  theodufi.rw@gmail.com or create an issue in the project repository.
 
-This document was generated on: December 5, 2023
+This document was generated on: Wednesday August 27, 2025
