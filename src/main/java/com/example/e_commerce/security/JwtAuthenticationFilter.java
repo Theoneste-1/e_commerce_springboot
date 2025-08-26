@@ -29,7 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
-        System.out.println("this is all of signup 2");
+
       try{
           String jwt = parseToken(request);
           if(jwt != null && jwtUtil.validateJwtToken(jwt))
