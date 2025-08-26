@@ -21,6 +21,7 @@ public class User {
 
     @Id
     @UuidGenerator
+    @Column(name = "id", columnDefinition = "varchar(36)")
     private String id;
 
     @Column(name = "username", length = 64, unique = true, nullable = false)
@@ -42,9 +43,16 @@ public class User {
     @ManyToMany(fetch = FetchType.LAZY)
             @JoinTable(
             name="app_user_roles",
-            joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns=@JoinColumn(name="role_id")
-
+                    joinColumns = @JoinColumn(
+                            name = "user_id",
+                            referencedColumnName = "id",
+                            columnDefinition = "varchar(36)"   // 👈 force varchar(36)
+                    ),
+                    inverseJoinColumns = @JoinColumn(
+                            name = "role_id",
+                            referencedColumnName = "id",
+                            columnDefinition = "varchar(36)"   // 👈 also varchar(36) if Role.id is String
+                    )
     )
     private Set<Role> roles = new HashSet();
 
