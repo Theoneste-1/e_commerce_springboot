@@ -2,6 +2,7 @@ package com.example.e_commerce.services;
 
 import com.example.e_commerce.config.PasswordEncoder;
 import com.example.e_commerce.dto.auth.SignupRequest;
+import com.example.e_commerce.exceptions.UserAlreadyExistsException;
 import com.example.e_commerce.models.Role;
 import com.example.e_commerce.models.User;
 import com.example.e_commerce.repositories.RoleRepository;
@@ -25,11 +26,11 @@ public class AuthService {
     @Transactional
     public void registerUser(SignupRequest signupRequest) {
         if (userRepository.existsByUsername(signupRequest.getUsername())) {
-            throw new RuntimeException("Error: Username is already taken!");
+            throw new UserAlreadyExistsException("Error: Username is already taken!");
         }
 
         if (userRepository.existsByEmail(signupRequest.getEmail())) {
-            throw new RuntimeException("Error: Email is already in use!");
+            throw new UserAlreadyExistsException("Error: Email is already in use!");
         }
 
         // Create new user account

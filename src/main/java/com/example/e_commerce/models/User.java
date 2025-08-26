@@ -33,7 +33,7 @@ public class User {
     @Column(name = "enabled", nullable = false)
     private Boolean enabled = true;
 
-    @Column(name = "email", length = 254)
+    @Column(name = "email", length = 254, unique = true, nullable = false)
     private String email;
 
     @CreationTimestamp

@@ -29,6 +29,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
+        System.out.println("this is all of signup 2");
       try{
           String jwt = parseToken(request);
           if(jwt != null && jwtUtil.validateJwtToken(jwt))
@@ -46,9 +47,11 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
               }
           }
+
       }catch (Exception e){
          logger.error("Exception occurred while attempting to process JWT token ,  {}", e.getMessage());
       }
+        filterChain.doFilter(request, response);
     }
 
     public String parseToken(HttpServletRequest request) {
