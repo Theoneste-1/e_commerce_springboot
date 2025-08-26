@@ -1,8 +1,14 @@
 package com.example.e_commerce.controllers;
 
 import com.example.e_commerce.dto.auth.JwtResponse;
+import com.example.e_commerce.dto.auth.LoginRequest;
+import com.example.e_commerce.dto.auth.SignupRequest;
+import com.example.e_commerce.security.CustomUserDetails;
 import com.example.e_commerce.security.JWTUtil;
 import com.example.e_commerce.services.AuthService;
+import com.example.e_commerce.utils.auth.MessageResponse;
+import com.example.e_commerce.utils.auth.TokenRefreshRequest;
+import com.example.e_commerce.utils.auth.TokenRefreshResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -69,7 +75,7 @@ public class AuthController {
         String refreshToken = request.getRefreshToken();
 
         if (jwtUtils.validateJwtToken(refreshToken) && jwtUtils.isRefreshToken(refreshToken)) {
-            Long userId = jwtUtils.getUserIdFromJwtToken(refreshToken);
+            String userId = jwtUtils.getUserIdFromJwtToken(refreshToken);
             String username = jwtUtils.getUsernameFromJwtToken(refreshToken);
 
             String newAccessToken = jwtUtils.generateTokenFromUserId(userId, username, false);

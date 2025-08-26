@@ -61,6 +61,19 @@ public class User {
         role.getUsers().add(this);
     }
 
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
+
+    // Constructor with all fields except id and createdAt
+    public User(String username, String password, Boolean enabled, String email) {
+        this.username = username;
+        this.password = password;
+        this.enabled = enabled;
+        this.email = email;
+    }
+
     public void removeRole(Role role) {
         this.roles.remove(role);
         role.getUsers().remove(this);

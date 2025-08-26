@@ -1,9 +1,12 @@
 package com.example.e_commerce.services;
 
+import com.example.e_commerce.config.PasswordEncoder;
+import com.example.e_commerce.dto.auth.SignupRequest;
+import com.example.e_commerce.models.Role;
+import com.example.e_commerce.models.User;
 import com.example.e_commerce.repositories.RoleRepository;
 import com.example.e_commerce.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -31,7 +34,7 @@ public class AuthService {
 
         // Create new user account
         User user = new User(signupRequest.getUsername(),
-                passwordEncoder.encode(signupRequest.getPassword()));
+                passwordEncoder.encoder().encode(signupRequest.getPassword()));
 
         user.setEmail(signupRequest.getEmail());
         user.setEnabled(true);

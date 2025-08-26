@@ -27,6 +27,11 @@ public class JWTUtil {
     @Value("${app.jwt.refresh-expiration:604800000}") // 7 days in milliseconds
     private int refreshTokenExpirationMs;
 
+    public String generateJwtToken(Authentication authentication) {
+        CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
+        return generateTokenFromUserId(userPrincipal.getId(), userPrincipal.getUsername(), false);
+    }
+
     public String generateTokenFromUserId(String userId, String username, boolean isRefreshToken) {
         Date expiryDate = new Date(System.currentTimeMillis() +
                 (isRefreshToken ? refreshTokenExpirationMs : jwtExpirationMs));
