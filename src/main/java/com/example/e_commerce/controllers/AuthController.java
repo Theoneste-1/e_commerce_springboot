@@ -9,6 +9,7 @@ import com.example.e_commerce.services.AuthService;
 import com.example.e_commerce.utils.auth.MessageResponse;
 import com.example.e_commerce.utils.auth.TokenRefreshRequest;
 import com.example.e_commerce.utils.auth.TokenRefreshResponse;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;

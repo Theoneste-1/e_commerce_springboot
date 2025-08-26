@@ -27,7 +27,7 @@ public class SecurityConfig {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
-    private CustomUserDetails.CustomUserDetailsService customUserDetailsService;
+    private CustomUserDetailsService customUserDetailsService;
 
     @Bean
     public JwtAuthenticationFilter jwtAuthenticationFilter() {
@@ -55,7 +55,7 @@ public class SecurityConfig {
                 .authorizeHttpRequests(authz -> authz
                         // Public endpoints
                         .requestMatchers("/api/auth/**").permitAll()
-                        .requestMatchers("/api/roles/**").permitAll()
+                        .requestMatchers(HttpMethod.POST,"/api/roles/**").permitAll()
                         .requestMatchers("/api/public/**").permitAll()
                         .requestMatchers("/h2-console/**").permitAll() // For development
 

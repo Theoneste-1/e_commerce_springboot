@@ -6,6 +6,8 @@ import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.springframework.stereotype.Service;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -24,5 +26,7 @@ public class SignupRequest {
     @NotBlank(message = "Password is required")
     @Size(min = 6, max = 40, message = "Password must be between 6 and 40 characters")
     private String password;
+
+    private Set<Role> roles;
 
 }

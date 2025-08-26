@@ -25,12 +25,4 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserDetails(user);
     }
 
-    // Additional method to load user by ID (useful for JWT)
-    @Transactional()
-    public CustomUserDetails loadUserById(String userId) {
-        User user = userRepository.findByIdWithRoles(userId)
-                .orElseThrow(() -> new UsernameNotFoundException("User not found with id: " + userId));
-
-        return new CustomUserDetails(user);
-    }
 }
