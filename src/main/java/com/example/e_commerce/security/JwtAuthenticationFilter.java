@@ -38,13 +38,12 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                   logger.warn("Attempted to use refresh token for authentication");
               }else {
                   String userId = jwtUtil.getUserIdFromJwtToken(jwt);
-                  UserDetails userDetails = customUserDetailsService.loadUserByUsername(userId);
+                  UserDetails userDetails = customUserDetailsService.loadByUserId(userId);
 
                   UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(userDetails, null, userDetails.getAuthorities());
                   SecurityContextHolder.getContext().setAuthentication(authentication);
 
                   authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
               }
           }
 

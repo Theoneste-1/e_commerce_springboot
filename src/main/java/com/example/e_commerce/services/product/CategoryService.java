@@ -1,5 +1,9 @@
 package com.example.e_commerce.services.product;
 
+import com.example.e_commerce.dto.category_brand.CategoryCreateRequest;
+import com.example.e_commerce.dto.category_brand.CategoryResponse;
+import com.example.e_commerce.dto.category_brand.CategoryUpdateRequest;
+import com.example.e_commerce.exceptions.ResourceNotFoundException;
 import com.example.e_commerce.models.product.Category;
 import com.example.e_commerce.repositories.product.CategoryRepository;
 import org.slf4j.Logger;
@@ -52,4 +56,30 @@ public class CategoryService {
         if (category == null) throw new ResourceNotFoundException("Category not found: " + id);
         if (request.name() != null) category.setName(request.name());
         if (request.description() != null) category.setDescription(request.description());
-        if (request
+        if (request.parentCategoryId() != null) {
+            Category parent = categoryRepository.findByIdNative(request.parentCategoryId());
+            if (parent == null) throw new ResourceNotFoundException("Parent category not found: " + request.parentCategoryId());
+            category.setParentCategory(parent);
+        }
+        category = categoryRepository.save(category);
+        logger.info("Updated category with ID: {}", id);
+        return mapToResponse(category);
+    }
+
+    @Transactional
+    public void deleteCategory(String id) {
+        Category category = categoryRepository.findByIdNative(id);
+        if (category == null) throw new ResourceNotFoundException("Category not found: " + id);
+        categoryRepository.delete(category);
+        logger.info("Deleted category with ID: {}", id);
+    }
+
+    private CategoryResponse mapToResponse(Category category) {
+        return new CategoryResponse(
+                category.getId(),
+                category.getName(),
+                category.getDescription(),
+                category.getParentCategory() != null ? category.getParentCategory().getId() : null
+        );
+    }
+}

@@ -1,12 +1,20 @@
 package com.example.e_commerce.models.cart;
-
-import com.example.e_commerce.models.product.Product;
+;
+import com.example.e_commerce.models.auth.User;
 import jakarta.persistence.*;
 import lombok.*;
 import org.hibernate.annotations.UuidGenerator;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
+
+
+import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
-@Table(name = "cart_items")
+@Table(name = "carts")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,14 +26,18 @@ public class Cart {
     @Column(name = "id", columnDefinition = "varchar(36)")
     private String id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "cart_id", nullable = false)
-    private Cart cart;
+    @OneToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false, unique = true)
+    private User user;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Product product;
+    @CreationTimestamp
+    @Column(name = "created_at", updatable = false)
+    private LocalDateTime createdAt;
 
-    @Column(name = "quantity", nullable = false)
-    private Integer quantity;
+    @UpdateTimestamp
+    @Column(name = "updated_at")
+    private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "cart", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.LAZY)
+    private Set<CartItem> cartItems = new HashSet<>();
 }

@@ -25,4 +25,13 @@ public class CustomUserDetailsService implements UserDetailsService {
         return new CustomUserDetails(user);
     }
 
+
+    @Transactional
+    public CustomUserDetails loadByUserId(String id) throws UsernameNotFoundException {
+        User user = userRepository.findById(id)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with id: " + id));
+
+        return new CustomUserDetails(user);
+    }
+
 }
