@@ -1,5 +1,6 @@
 package theo.dev.ecommerce.models.auth;
 
+import theo.dev.ecommerce.auth.AuthProvider;
 import theo.dev.ecommerce.models.address.Address;
 import theo.dev.ecommerce.models.cart.Cart;
 import theo.dev.ecommerce.models.order.Order;
@@ -41,21 +42,17 @@ public class User {
     @Column(name = "email", length = 254, unique = true, nullable = false)
     private String email;
 
+    @Column(name = "provider")
+    @Enumerated(EnumType.STRING)
+    private AuthProvider provider;
+
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private LocalDateTime created_at;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "app_user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", columnDefinition = "varchar(36)" // 👈
-                                                                                                                                                  // force
-                                                                                                                                                  // varchar(36)
-    ), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id", columnDefinition = "varchar(36)" // 👈
-                                                                                                                        // also
-                                                                                                                        // varchar(36)
-                                                                                                                        // if
-                                                                                                                        // Role.id
-                                                                                                                        // is
-                                                                                                                        // String
+    @JoinTable(name = "app_user_roles", joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id", columnDefinition = "varchar(36)"
+    ), inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id", columnDefinition = "varchar(36)"
     ))
     private Set<Role> roles = new HashSet();
 

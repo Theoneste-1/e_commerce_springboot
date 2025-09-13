@@ -94,7 +94,19 @@ public class SecurityConfig {
                         .requestMatchers("/api/seller/**").hasAnyRole("ADMIN", "SELLER")
 
                         // Any other request must be authenticated
-                        .anyRequest().authenticated());
+                        .anyRequest().authenticated())
+                .oauth2Login(oauth2 -> oauth2
+                        .authorizationEndpoint(authorization ->
+                                authorization.baseUri("/api/auth/oauth2/authorize"))
+                        .redirectionEndpoint(redirection ->
+                                redirection.baseUri("/api/auth/oauth2/callback/*"))
+                        .userInfoEndpoint(userInfo ->
+                                userInf2Se.userService(customOAuth2UserService()))
+                        .successHandler(oAuth2AuthenticationSuccessHandler())
+                        .failureHandler(oAuth2AuthenticationFailureHandler())
+                );
+
+
 
         http.authenticationProvider(authenticationProvider());
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

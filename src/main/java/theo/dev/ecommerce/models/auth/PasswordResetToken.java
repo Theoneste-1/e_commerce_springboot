@@ -14,6 +14,7 @@ import java.time.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
+@Table(name = "password_reset_tokens")
 public class PasswordResetToken {
 
     @Id

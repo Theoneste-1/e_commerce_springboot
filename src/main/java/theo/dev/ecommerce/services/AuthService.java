@@ -138,7 +138,7 @@ public class AuthService {
         tokenRepository.save(resetToken);
 
         // Send email
-        String resetLink = appProperties.getFrontendUrl() + "/reset-password?token=" + token + "&email=" + user.getEmail();
+        String resetLink = appProperties.getFrontendUrl() + "/reset-password/"+ token + "?email=" + user.getEmail();
         sendResetEmail(user.getEmail(), resetLink);
     }
 
