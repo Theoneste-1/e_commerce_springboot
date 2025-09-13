@@ -1,6 +1,8 @@
 package theo.dev.ecommerce.services;
 
 import jakarta.validation.Valid;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
 import theo.dev.ecommerce.auth.ChangePasswordRequest;
 import theo.dev.ecommerce.auth.ForgetPasswordRequest;
 import theo.dev.ecommerce.auth.ResetPasswordRequest;
@@ -44,6 +46,10 @@ public class AuthService {
 
     @Autowired
     private AppProperties appProperties;
+
+
+    @Autowired
+    private JavaMailSender mailSender;
 
     @Transactional
     public void registerUser(SignupRequest signupRequest) {
