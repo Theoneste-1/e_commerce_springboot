@@ -27,6 +27,16 @@ public class SecurityConfig {
     private PasswordEncoder passwordEncoder;
 
     @Autowired
+    private CustomOAuth2UserService customOAuth2UserService;
+
+
+    @Autowired
+    private OAuth2AuthenticationSuccessHandler oAuth2AuthenticationSuccessHandler;
+
+    @Autowired
+    private OAuth2AuthenticationFailureHandler oAuth2AuthenticationFailureHandler;
+
+    @Autowired
     private CustomUserDetailsService customUserDetailsService;
 
     @Bean
@@ -101,9 +111,9 @@ public class SecurityConfig {
                         .redirectionEndpoint(redirection ->
                                 redirection.baseUri("/api/auth/oauth2/callback/*"))
                         .userInfoEndpoint(userInfo ->
-                                userInf2Se.userService(customOAuth2UserService()))
-                        .successHandler(oAuth2AuthenticationSuccessHandler())
-                        .failureHandler(oAuth2AuthenticationFailureHandler())
+                                userInfo.userService(customOAuth2UserService))
+                        .successHandler(oAuth2AuthenticationSuccessHandler)
+                        .failureHandler(oAuth2AuthenticationFailureHandler)
                 );
 
 
