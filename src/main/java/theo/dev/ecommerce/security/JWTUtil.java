@@ -49,11 +49,26 @@ public class JWTUtil {
                 .compact();
     }
 
+    public String generateTokenFromUsername(String username) {
+        Date expiryDate = new Date(System.currentTimeMillis() + jwtExpirationMs);
+        Map<String, Object> claims = new HashMap<>();
+        claims.put("username", username);
+        claims.put("type","access");
+
+        return Jwts.builder()
+                .setClaims(claims)
+                .setSubject(username.toString())
+                .setIssuedAt(new Date())
+                .setExpiration(expiryDate)
+                .signWith(getSigningKey(), SignatureAlgorithm.HS256)
+                .compact();
+    }
     // Generate refresh token
     public String generateRefreshToken(Authentication authentication) {
         CustomUserDetails userPrincipal = (CustomUserDetails) authentication.getPrincipal();
         return generateTokenFromUserId(userPrincipal.getId(), userPrincipal.getUsername(), true);
     }
+
 
     // Get username from JWT token
     public String getUsernameFromJwtToken(String token) {
